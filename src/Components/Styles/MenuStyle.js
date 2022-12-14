@@ -12,17 +12,18 @@ export const NavMenu = styled.div`
 `
 export const Habitos = styled.button`
     border:none;
-    background-color: pink;
+    background-color: #FFFFFF;
     margin-left: 10px;
     margin-right: 10px;
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
     text-align: center;
+    color: #52B6FF;
 
 `
 export const Hoje = styled.button`
-    background-color: pink;
+    background-color: #FFFFFF;
     border:none;
     margin-left: 10px;
     margin-right: 10px;
@@ -33,7 +34,7 @@ export const Hoje = styled.button`
 
 `
 export const Historico = styled.button`
-    background-color: pink;
+    background-color: #FFFFFF;
     border:none;
     margin-left: 10px;
     margin-right: 10px;
@@ -41,5 +42,6 @@ export const Historico = styled.button`
     font-size: 18px;
     line-height: 22px;
     text-align: center;
+    color: #52B6FF;
 
 `
