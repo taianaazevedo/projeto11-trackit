@@ -3,6 +3,7 @@ import styled from "styled-components"
 export const NavMenu = styled.div`
     display: flex;
     justify-content: center;
+    align-items:center;
     background-color: #FFFFFF;
     width:100%;
     height: 70px;

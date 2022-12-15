@@ -2,7 +2,7 @@ import { useState } from "react";
 import logo from "../../Assets/logo.png";
 import { Tela, Login } from "./styles";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function TelaLogin() {
     const [email, setEmail] = useState("");
@@ -35,7 +35,9 @@ export default function TelaLogin() {
                 </Login>
                 <button type="submit">Cadastrar</button>
             </form>
-            <p>Já tem uma conta? Faça login!</p>
+            <Link to="/">
+                <p>Já tem uma conta? Faça login!</p>
+            </Link>
         </Tela>
     )
 }

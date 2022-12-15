@@ -15,9 +15,9 @@ export default function TelaLogin() {
         const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", body);
         promise.then((res) => {
             console.log(res.data);
-            navigate("/");
+            navigate("/hoje");
         });
-        promise.catch((err) => console.log(err.response.data))
+        promise.catch((err) => alert(err.response.data.message))
 
     }
 
@@ -26,8 +26,8 @@ export default function TelaLogin() {
             <img src={logo}></img>
             <form onSubmit={login}>
                 <Login>
-                    <input type="email" placeholder="email" value={email} onChange={(e) => setEmail(e.target.value)}/>
-                    <input type="password" placeholder="senha" value={password} onChange={(e) => setPassword(e.target.value)}/>
+                    <input type="email" placeholder="email" required value={email} onChange={(e) => setEmail(e.target.value)}/>
+                    <input type="password" placeholder="senha" required value={password} onChange={(e) => setPassword(e.target.value)}/>
                 </Login>
                 <button type="submit">Entrar</button>
             </form>
