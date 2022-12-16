@@ -9,19 +9,20 @@ export default function TelaLogin() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const {setUsuarioLogado} = useContext(UsuarioContext);
+    const { usuarioLogado, setUsuarioLogado} = useContext(UsuarioContext);
 
     function login(e) {
         e.preventDefault();
         const body = { email, password };
         const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", body);
         promise.then((res) => {
-            setUsuarioLogado(res.data);
+            setUsuarioLogado(res.data);           
             navigate("/hoje");
         });
         promise.catch((err) => alert(err.response.data.message))
 
     }
+
 
     return (
         <Tela>

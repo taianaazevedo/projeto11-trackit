@@ -13,11 +13,20 @@ export default function Habitos() {
     const [habito, setHabito] = useState(null);
     const { usuarioLogado } = useContext(UsuarioContext);
 
+
+    useEffect(() => {
+       carregaHabitos()
+    }, [])
+
+    if (habito === null) {
+        return <div>Carregando...</div>
+    }
+
     function adicionarHabito() {
         setMostraCriarHabito(true);
     }
 
-    useEffect(() => {
+    function carregaHabitos(){
         const config = {
             headers: {
                 Authorization: `Bearer ${usuarioLogado.token}`
@@ -26,12 +35,24 @@ export default function Habitos() {
         const promise = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config);
         promise.then((res) => setHabito(res.data));
         promise.catch((err) => console.log(err.response.data));
-    }, [])
-
-    if (habito === null) {
-        return <div>Carregando...</div>
     }
 
+
+    function deletarHabito(habito){
+        if(window.confirm("Você realmente deseja apagar o hábito?")){
+            const config = {
+                headers: {
+                    Authorization: `Bearer ${usuarioLogado.token}`
+                }
+            }
+            const promise = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habito.id}`, config);
+            promise.then((res) => {
+                carregaHabitos();
+            })
+            promise.catch((err) => alert("Houve um erro ao deletar o hábito"))
+            
+        }
+    }
 
     return (
         <Container>
@@ -39,13 +60,13 @@ export default function Habitos() {
                 <p>Meus Hábitos</p>
                 <button onClick={adicionarHabito}>+</button>
             </MeusHabitos>
-            {mostraCriarHabito && <BoxHabito setMostraCriarHabito={setMostraCriarHabito} />}
+            {mostraCriarHabito && <BoxHabito setMostraCriarHabito={setMostraCriarHabito} carregaHabitos={carregaHabitos}/>}
 
             {habito.map((h) =>
                 <CadaHabito key={h.id}>
                     <NomeHabito>
                         <p>{h.name}</p>
-                        <img src={lixeira} />
+                        <img src={lixeira} onClick={() => deletarHabito(h)}/>
                     </NomeHabito>
                     <Semana>
                         {dias.map((d, i) =>

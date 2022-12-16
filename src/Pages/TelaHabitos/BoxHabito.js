@@ -4,7 +4,7 @@ import UsuarioContext from "../../Context/UsuarioContext";
 import axios from "axios";
 
 
-export default function BoxHabito({ setMostraCriarHabito }) {
+export default function BoxHabito({ setMostraCriarHabito, carregaHabitos }) {
     const dias = ["D", "S", "T", "Q", "Q", "S", "S"];
     const [nomeHabito, setNomeHabito] = useState("");
     const [diaSelecionado, setDiaSelecionado] = useState([]);
@@ -41,7 +41,8 @@ export default function BoxHabito({ setMostraCriarHabito }) {
         const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body, config);
         promise.then((res) => {
             cancelar();
-            alert("Hábito registrado!");
+            alert("Hábito registrado!")
+            carregaHabitos();
         });
         promise.catch((erro) => alert("Por favor, tente novamente"));
 
