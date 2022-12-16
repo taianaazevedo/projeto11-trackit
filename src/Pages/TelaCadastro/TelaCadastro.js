@@ -19,7 +19,7 @@ export default function TelaLogin() {
             alert("Cadastro realizado!");
             navigate("/");
         });
-        promise.catch((err) => console.log(err.response.data))
+        promise.catch((err) => alert(err.response.data.message))
 
     }
 

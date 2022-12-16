@@ -1,20 +1,22 @@
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../Assets/logo.png";
 import { Tela, Login } from "./styles";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
+import UsuarioContext from "../../Context/UsuarioContext";
 
 export default function TelaLogin() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const {setUsuarioLogado} = useContext(UsuarioContext);
 
     function login(e) {
         e.preventDefault();
         const body = { email, password };
         const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", body);
         promise.then((res) => {
-            console.log(res.data);
+            setUsuarioLogado(res.data);
             navigate("/hoje");
         });
         promise.catch((err) => alert(err.response.data.message))

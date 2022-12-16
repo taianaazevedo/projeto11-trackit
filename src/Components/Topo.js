@@ -1,12 +1,15 @@
 import logo from "../Assets/TrackIt.png";
-import foto from "../Assets/fotoFake.png";
-import { Header } from "./Styles/TopoStyle";
+import { Header, FotoUsuario } from "./Styles/TopoStyle";
+import UsuarioContext from "../Context/UsuarioContext";
+import { useContext } from "react";
 
 export default function Topo() {
+    const {usuarioLogado} = useContext(UsuarioContext)
+
     return (
         <Header>            
                 <img src={logo} />
-                <img src={foto} />            
+                <FotoUsuario src={usuarioLogado.image}></FotoUsuario>            
         </Header>
     )
 }

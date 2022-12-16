@@ -15,4 +15,10 @@ img{
     margin-left:20px;
     margin-right:20px;
 }
+
+`
+export const FotoUsuario = styled.img`
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
 `
