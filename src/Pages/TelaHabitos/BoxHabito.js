@@ -5,21 +5,23 @@ import axios from "axios";
 
 
 export default function BoxHabito({ setMostraCriarHabito }) {
-    const dias = ["S", "T", "Q", "Q", "S", "S", "D"];
+    const dias = ["D", "S", "T", "Q", "Q", "S", "S"];
     const [nomeHabito, setNomeHabito] = useState("");
     const [diaSelecionado, setDiaSelecionado] = useState([]);
     const { usuarioLogado } = useContext(UsuarioContext);
 
 
 
-    function selecionaDia(index) {
-        if (!diaSelecionado.includes(index)) {
-            const listaDias = [...diaSelecionado, index];
+    function selecionaDia(i) {
+        if (!diaSelecionado.includes(i)) {
+            const listaDias = [...diaSelecionado, i];
             setDiaSelecionado(listaDias);
+            console.log(listaDias)
             return;
         } else {
-            const filtraDias = diaSelecionado.filter((dia) => !(dia === index));
+            const filtraDias = diaSelecionado.filter((d) => !(d === i));
             setDiaSelecionado([...filtraDias]);
+            console.log(filtraDias)
             return;
         }
     }
@@ -38,22 +40,24 @@ export default function BoxHabito({ setMostraCriarHabito }) {
         }
         const promise = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body, config);
         promise.then((res) => {
-            cancelar()
-            alert("Hábito registrado!")});
-        promise.catch((erro) => alert("Por favor, tente novamente"))
+            cancelar();
+            alert("Hábito registrado!");
+        });
+        promise.catch((erro) => alert("Por favor, tente novamente"));
 
     }
 
 
     return (
         <AddHabito onSubmit={enviarHabito}>
-            <input placeholder="nome do hábito" value={nomeHabito} onChange={(e) => setNomeHabito(e.target.value)}></input>
-            <Semana>{dias.map((dia, index) => (
-                <Dia key={index}
-                    selecionado={diaSelecionado.includes(index)}
-                    onClick={() => selecionaDia(index)}
-                >{dia}
-                </Dia>))}
+            <input placeholder="nome do hábito" required value={nomeHabito} onChange={(e) => setNomeHabito(e.target.value)}></input>
+            <Semana>
+                {dias.map((dia, i) => (
+                    <Dia key={i}
+                        selecionado={diaSelecionado.includes(i)}
+                        onClick={() => selecionaDia(i)}
+                    >{dia}
+                    </Dia>))}
             </Semana>
             <Botoes>
                 <Cancelar onClick={cancelar}>Cancelar</Cancelar>
@@ -106,6 +110,7 @@ const Dia = styled.div`
     border-radius: 5px; 
     font-size: 18px;
     line-height: 25px;
+    cursor:pointer;
     color: ${props => props.selecionado ? "#FFFFFF" : "#DBDBDB"};
 `
 
@@ -121,12 +126,14 @@ const Cancelar = styled.button`
     border:none;
     background-color: #FFFFFF;
     color:#52B6FF;
+   
 `
 const Salvar = styled.button`
-      width:84px;
+    width:84px;
     height: 35px;
     margin-top:25px;
     margin-right:10px;
+    
     width: 84px;
     height: 35px;
     background: #52B6FF;

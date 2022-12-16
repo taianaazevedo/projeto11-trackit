@@ -8,6 +8,7 @@ import lixeira from "../../Assets/lixeira.png"
 
 
 export default function Habitos() {
+    const dias = ["D", "S", "T", "Q", "Q", "S", "S"];
     const [mostraCriarHabito, setMostraCriarHabito] = useState(false);
     const [habito, setHabito] = useState(null);
     const { usuarioLogado } = useContext(UsuarioContext);
@@ -39,6 +40,7 @@ export default function Habitos() {
                 <button onClick={adicionarHabito}>+</button>
             </MeusHabitos>
             {mostraCriarHabito && <BoxHabito setMostraCriarHabito={setMostraCriarHabito} />}
+
             {habito.map((h) =>
                 <CadaHabito key={h.id}>
                     <NomeHabito>
@@ -46,11 +48,12 @@ export default function Habitos() {
                         <img src={lixeira} />
                     </NomeHabito>
                     <Semana>
-                        {h.days.map((d) =>
-                            <Dias key={d}>{d}</Dias>)}
+                        {dias.map((d, i) =>
+                            <Dias selecionado={h.days.includes(i)}>{d}</Dias>)}
                     </Semana>
                 </CadaHabito>)}
-            <Text>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Text>
+                
+            {habito.length === 0 && <Text>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</Text>}
         </Container>
     )
 }
@@ -92,6 +95,7 @@ const Semana = styled.div`
 `
 
 const Dias = styled.div`
+    background: ${props => props.selecionado ? "#CFCFCF" : "#FFFFFF"};
     margin-left:10px;
     width: 30px;
     height: 30px;
@@ -101,6 +105,6 @@ const Dias = styled.div`
     border: 1px solid #D4D4D4;
     border-radius: 5px; 
     font-size: 18px;
-    color:#DBDBDB;
+    color: ${props => props.selecionado ? "#FFFFFF" : "#DBDBDB"};
     
 `

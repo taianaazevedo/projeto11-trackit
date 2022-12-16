@@ -1,12 +1,13 @@
 import check from "../../Assets/Vector.png";
 import { TelaHoje, Dia, CardHabito, Descricao, CheckBox } from "./styles";
+import dayjs from "dayjs";
 
 
 export default function Hoje() {
     return (
         <TelaHoje>
             <Dia>
-                <h1>Segunda-feira</h1>
+                <h1>{dayjs().format('DD/MM/YYYY')}</h1>
                 <br />
                 <p>Nenhum hábito concluído ainda</p>
                 <CardHabito>
