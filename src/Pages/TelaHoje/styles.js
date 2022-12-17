@@ -9,6 +9,9 @@ export const TelaHoje = styled.div`
     flex-direction: column;
     align-items: center;
     background-color: #E5E5E5;
+    .textoVerde{
+        color:green;
+    }
 
 `
 export const Dia = styled.div`

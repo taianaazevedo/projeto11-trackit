@@ -16,12 +16,10 @@ export default function BoxHabito({ setMostraCriarHabito, carregaHabitos }) {
         if (!diaSelecionado.includes(i)) {
             const listaDias = [...diaSelecionado, i];
             setDiaSelecionado(listaDias);
-            console.log(listaDias)
             return;
         } else {
             const filtraDias = diaSelecionado.filter((d) => !(d === i));
             setDiaSelecionado([...filtraDias]);
-            console.log(filtraDias)
             return;
         }
     }

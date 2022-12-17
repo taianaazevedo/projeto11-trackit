@@ -9,7 +9,7 @@ export default function TelaLogin() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const { usuarioLogado, setUsuarioLogado} = useContext(UsuarioContext);
+    const { setUsuarioLogado} = useContext(UsuarioContext);
 
     function login(e) {
         e.preventDefault();
